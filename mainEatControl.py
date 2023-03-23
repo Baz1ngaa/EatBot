@@ -240,7 +240,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
         if(message.text.lower()== "я позавтракала"):
             
             if( (breakfastMinute+intervalEat)%60 != breakfastMinute+intervalEat):
-                if(currentime.hour < (breakfastHour+1) % 24 or currentime.minute <= (breakfastMinute+intervalEat) % 60):
+                if(currentime.hour +1< (breakfastHour+1) % 24 or currentime.minute <= (breakfastMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -251,7 +251,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
             if( (breakfastMinute+intervalEat)%60 == breakfastMinute+intervalEat):
-                if(currentime.hour <= breakfastHour % 24 and currentime.minute <= (breakfastMinute+intervalEat) % 60):
+                if(currentime.hour+1 <= breakfastHour % 24 and currentime.minute <= (breakfastMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -263,7 +263,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
         if(message.text.lower()== "я пообедала"):
             
             if( (launchMinute+intervalEat)%60 != launchMinute+intervalEat):
-                if(currentime.hour < (launchHour+1) % 24 or currentime.minute <= (launchMinute+intervalEat) % 60):
+                if(currentime.hour+1 < (launchHour+1) % 24 or currentime.minute <= (launchMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -275,7 +275,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
                     
             if( (launchMinute+intervalEat)%60 == launchMinute+intervalEat):
-                if(currentime.hour <= launchHour % 24 and currentime.minute <= (launchMinute+intervalEat) % 60):
+                if(currentime.hour+1 <= launchHour % 24 and currentime.minute <= (launchMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -288,7 +288,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     
         if(message.text.lower()== "я поужинала"):
             if( (eveningMinute+intervalEat)%60 != eveningMinute+intervalEat):
-                if(currentime.hour < (eveningHour+1) % 24 or currentime.minute <= (eveningMinute+intervalEat) % 60):
+                if(currentime.hour+1 < (eveningHour+1) % 24 or currentime.minute <= (eveningMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -298,7 +298,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
             if( (eveningMinute+intervalEat)%60 == eveningMinute+intervalEat):
-                if(currentime.hour <= eveningHour % 24 and currentime.minute <= (eveningMinute+intervalEat) % 60):
+                if(currentime.hour+1 <= eveningHour % 24 and currentime.minute <= (eveningMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -315,7 +315,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
         if(message.text.lower()== "я позавтракала"):
             
             if( (breakfastWeekingMinute+intervalEat)%60 != breakfastWeekingMinute+intervalEat):
-                if(currentime.hour < (breakfastWeekingHour+1) % 24 or currentime.minute <= (breakfastWeekingMinute+intervalEat) % 60):
+                if(currentime.hour+1 < (breakfastWeekingHour+1) % 24 or currentime.minute <= (breakfastWeekingMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -325,7 +325,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
             if( (breakfastWeekingMinute+intervalEat)%60 == breakfastWeekingMinute+intervalEat):
-                if(currentime.hour <= breakfastWeekingHour % 24 and currentime.minute <= (breakfastWeekingMinute+intervalEat) % 60):
+                if(currentime.hour+1 <= breakfastWeekingHour % 24 and currentime.minute <= (breakfastWeekingMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -337,7 +337,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
         if(message.text.lower()== "я пообедала"):
             
             if( (launchWeekingMinute+intervalEat)%60 != launchWeekingMinute+intervalEat):
-                if(currentime.hour < (launchWeekingHour+1) % 24 or currentime.minute <= (launchWeekingMinute+intervalEat) % 60):
+                if(currentime.hour+1 < (launchWeekingHour+1) % 24 or currentime.minute <= (launchWeekingMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -349,7 +349,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
                     
             if( (launchWeekingMinute+intervalEat)%60 == launchWeekingMinute+intervalEat):
-                if(currentime.hour <= launchWeekingHour % 24 and currentime.minute <= (launchWeekingMinute+intervalEat) % 60):
+                if(currentime.hour+1 <= launchWeekingHour % 24 and currentime.minute <= (launchWeekingMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -362,7 +362,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     
         if(message.text.lower()== "я поужинала"):
             if( (eveningWeekingMinute+intervalEat)%60 != eveningWeekingMinute+intervalEat):
-                if(currentime.hour < (eveningWeekingHour+1) % 24 or currentime.minute <= (eveningWeekingMinute+intervalEat) % 60):
+                if(currentime.hour+1 < (eveningWeekingHour+1) % 24 or currentime.minute <= (eveningWeekingMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -372,7 +372,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
             if( (eveningWeekingMinute+intervalEat)%60 == eveningWeekingMinute+intervalEat):
-                if(currentime.hour <= eveningWeekingHour % 24 and currentime.minute <= (eveningWeekingMinute+intervalEat) % 60):
+                if(currentime.hour+1 <= eveningWeekingHour % 24 and currentime.minute <= (eveningWeekingMinute+intervalEat) % 60):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedBalance == 1):
                         balance=balance+10
@@ -476,12 +476,12 @@ def schedule_jobs():
     
     sql.execute(f"SELECT timeBreakfastHour, timeBreakfastMinute, timeLaunchHour, timeLaunchMinute, timeEveningHour, timeEveningMinute, timeBreakfastWeekingHour, timeBreakfastWeekingMinute, timeLaunchWeekingHour, timeLaunchWeekingMinute, timeEveningWeekingHour, timeEveningWeekingMinute FROM profileTel WHERE login= '{login_id}' ")
     breakfastHour, breakfastMinute,launchHour,launchMinute,eveningHour, eveningMinute,breakfastWeekingHour, breakfastWeekingMinute,launchWeekingHour,launchWeekingMinute,eveningWeekingHour, eveningWeekingMinute=sql.fetchone()
-    scheduler.add_job(timeMessageBreakfast, "cron",day_of_week='mon-fri', hour=breakfastHour, minute=breakfastMinute, args=(dp,))
-    scheduler.add_job(timeMessageLaunch, "cron",day_of_week='mon-fri', hour=launchHour, minute=launchMinute, args=(dp,))
-    scheduler.add_job(timeMessageEvening, "cron",day_of_week='mon-fri', hour=eveningHour, minute=eveningMinute, args=(dp,))
-    scheduler.add_job(timeMessageBreakfast, "cron",day_of_week='sat-sun', hour=breakfastWeekingHour, minute=breakfastWeekingMinute, args=(dp,))
-    scheduler.add_job(timeMessageLaunch, "cron",day_of_week='sat-sun', hour=launchWeekingHour, minute=launchWeekingMinute, args=(dp,))
-    scheduler.add_job(timeMessageEvening, "cron",day_of_week='sat-sun', hour=eveningWeekingHour, minute=eveningWeekingMinute, args=(dp,))
+    scheduler.add_job(timeMessageBreakfast, "cron",day_of_week='mon-fri', hour=breakfastHour-1, minute=breakfastMinute, args=(dp,))
+    scheduler.add_job(timeMessageLaunch, "cron",day_of_week='mon-fri', hour=launchHour-1, minute=launchMinute, args=(dp,))
+    scheduler.add_job(timeMessageEvening, "cron",day_of_week='mon-fri', hour=eveningHour-1, minute=eveningMinute, args=(dp,))
+    scheduler.add_job(timeMessageBreakfast, "cron",day_of_week='sat-sun', hour=breakfastWeekingHour-1, minute=breakfastWeekingMinute, args=(dp,))
+    scheduler.add_job(timeMessageLaunch, "cron",day_of_week='sat-sun', hour=launchWeekingHour-1, minute=launchWeekingMinute, args=(dp,))
+    scheduler.add_job(timeMessageEvening, "cron",day_of_week='sat-sun', hour=eveningWeekingHour-1, minute=eveningWeekingMinute, args=(dp,))
 
     
 
