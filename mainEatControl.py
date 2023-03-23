@@ -19,9 +19,6 @@ import datetime
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import date
 import random
-#from data import config
-
-
 
 
 
