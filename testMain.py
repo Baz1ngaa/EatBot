@@ -33,7 +33,7 @@ available_timeBreak = ["6:30","7:00", "7:30"]
 available_timeBreakWeeking = ["9:30","10:00", "10:30", "11:00","11:30"]
 available_timeLaunch = ["12:30" , "13:00","13:30",  "14:00", "14:30", "15:00"]
 global wdw
-wdw=12
+wdw=13
 available_timeEvening = ["18:00", "18:30","19:00", "19:30", "20:00",f"19:{wdw}"]
 available_YesOrNot = ["Да","Нет"]
 available_Ready = ["Готово"]
@@ -978,7 +978,7 @@ def schedule_jobs():
     #sql.execute(f"SELECT timeBreakfastHour, timeBreakfastMinute, timeLaunchHour, timeLaunchMinute, timeEveningHour, timeEveningMinute, timeBreakfastWeekingHour, timeBreakfastWeekingMinute, timeLaunchWeekingHour, timeLaunchWeekingMinute, timeEveningWeekingHour, timeEveningWeekingMinute FROM profileTel WHERE login= '{login_id}' ")
     #breakfastHour, breakfastMinute,launchHour,launchMinute,eveningHour, eveningMinute,breakfastWeekingHour, breakfastWeekingMinute,launchWeekingHour,launchWeekingMinute,eveningWeekingHour, eveningWeekingMinute=sql.fetchone()
     scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
-    scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
+    scheduler.add_job(timeMessageEvening, 'cron', minute=wdw, second= 20, args=(dp,))
     scheduler.add_job(AllowNull, 'cron',hour=1, minute=30, args=())
     
 
