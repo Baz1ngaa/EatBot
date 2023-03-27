@@ -33,8 +33,8 @@ available_timeBreak = ["6:30","7:00", "7:30"]
 available_timeBreakWeeking = ["9:30","10:00", "10:30", "11:00","11:30"]
 available_timeLaunch = ["12:30" , "13:00","13:30",  "14:00", "14:30", "15:00"]
 global wdw
-wdw=4
-available_timeEvening = ["18:00", "18:30","19:00", "19:30", "20:00",f"16:{wdw}"]
+wdw=12
+available_timeEvening = ["18:00", "18:30","19:00", "19:30", "20:00",f"19:{wdw}"]
 available_YesOrNot = ["Да","Нет"]
 available_Ready = ["Готово"]
 
@@ -892,17 +892,17 @@ async def timeMessageEvening(dp: Dispatcher):
                         for oneMan in person:
                             await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
         
-        # if(currentime.hour==16 and currentime.minute==wdw):
+        if(currentime.hour==19 and currentime.minute==wdw):
             
-        #     sql.execute(f"SELECT login FROM profileTel WHERE timeEveningHour= 16 ")
-        #     usersLoginHour=sql.fetchall()
-        #     sql.execute(f"SELECT login FROM profileTel WHERE timeEveningMinute= {wdw} ")
-        #     usersLogin=sql.fetchall()
-        #     usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
-        #     if(usersLogin != None):
-        #         for person in usersLogin:
-        #                 for oneMan in person:
-        #                     await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
+            sql.execute(f"SELECT login FROM profileTel WHERE timeEveningHour= 19 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeEveningMinute= {wdw} ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
         
     if(currentdate.weekday()==5 or currentdate.weekday()== 6 ):
         if(currentime.hour==18 and currentime.minute==0):
