@@ -977,8 +977,8 @@ def schedule_jobs():
     
     #sql.execute(f"SELECT timeBreakfastHour, timeBreakfastMinute, timeLaunchHour, timeLaunchMinute, timeEveningHour, timeEveningMinute, timeBreakfastWeekingHour, timeBreakfastWeekingMinute, timeLaunchWeekingHour, timeLaunchWeekingMinute, timeEveningWeekingHour, timeEveningWeekingMinute FROM profileTel WHERE login= '{login_id}' ")
     #breakfastHour, breakfastMinute,launchHour,launchMinute,eveningHour, eveningMinute,breakfastWeekingHour, breakfastWeekingMinute,launchWeekingHour,launchWeekingMinute,eveningWeekingHour, eveningWeekingMinute=sql.fetchone()
-    scheduler.add_job(timeMessageEvening, 'cron', minute=0, args=(dp,))
-    scheduler.add_job(timeMessageEvening, 'cron', minute=30, args=(dp,))
+    scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
+    scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
     scheduler.add_job(AllowNull, 'cron',hour=1, minute=30, args=())
     
 
