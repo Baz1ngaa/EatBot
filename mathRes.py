@@ -18,27 +18,34 @@
 # import time
 import datetime
 from datetime import date
-#from apscheduler.schedulers.asyncio import AsyncIOScheduler
-# hour=18
-# min=40
-# hournow=18
-# minnow=41
-# if( (min+30)%60 != min+30):
-#     if(hournow < (hour+1) % 24 or minnow <= (min+30) % 60):
-#         print("ok")
-#     else:
-#         print("no")
-# if( (min+30)%60 == min+30):
-#     print("yes")
-#     if(hournow <= hour % 24 and minnow <= (min+30) % 60):
-#         print("ok")
-#     else:
-#         print("no")
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+import pytz
+
+hour=17
+min=25
+hournow=18
+minnow=26
+interval=60
+if( (min+interval)%60 != min+interval):
+    if(hournow < (hour+1) % 24 or minnow <= (min+interval) % 60):
+        print("ok")
+    else:
+        print("no")
+if( (min+interval)%60 == min+interval):
+    print("yes")
+    if(hournow <= hour % 24 and minnow <= (min+interval) % 60):
+        print("ok")
+    else:
+        print("no")
 
 
-currentime=datetime.datetime.now()
+tz_Vienna = pytz.timezone('Europe/Vienna')
+currentime=datetime.datetime.now(tz_Vienna)
 currentdate=date.today()
-print(f"{currentime.hour}:{currentime.minute}") 
-print(currentdate.weekday())
+print(f"{currentime.hour}:{currentime.minute}")
+
+if (currentdate.weekday()==0 or currentdate.weekday()== 1 or currentdate.weekday()== 2 or currentdate.weekday()==3 or currentdate.weekday()==4 ):
+    print(currentdate.weekday()) 
+
     
 
