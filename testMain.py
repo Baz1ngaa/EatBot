@@ -29,12 +29,13 @@ API_TOKEN = '5977194701:AAGJusSEqCD6ug2iOijr3IlTvGJRfR4r6ag'
  
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
+global wdw, wdw2
+wdw=20
+wdw2=22
 available_timeBreak = ["6:30","7:00", "7:30"]
 available_timeBreakWeeking = ["9:30","10:00", "10:30", "11:00","11:30"]
 available_timeLaunch = ["12:30" , "13:00","13:30",  "14:00", "14:30", "15:00",  f"19:{wdw2}"]
-global wdw
-wdw=18
-wdw2=20
+
 available_timeEvening = ["18:00", "18:30","19:00", "19:30", "20:00",f"19:{wdw}"]
 available_YesOrNot = ["Да","Нет"]
 available_Ready = ["Готово"]
