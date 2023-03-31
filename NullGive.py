@@ -23,7 +23,7 @@ from collections import Counter
 import pytz
 
 
-db=sqlite3.connect('EatTest.db')
+db=sqlite3.connect('EatYuliia.db')
 sql=db.cursor()
 sql.execute("SELECT login FROM profileTel")
 allLogins = sql.fetchone()  
