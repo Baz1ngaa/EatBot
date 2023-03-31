@@ -106,9 +106,9 @@ async def cmd_start(message: types.Message, state: FSMContext):
     
     
     await message.answer(f"Привет, {message.from_user.full_name}, я помогу тебе контролировать приемы пищи и вознаграждать тебя за их соблюдения. В определенное время я буду присылать уведомление, на которые ты должна будешь прислать подтверждение приема пищи.")
-    #time.sleep(1)
-    #await message.answer(f"Если ты успела поесть максимум через {intervalEat} минут после сообщения, то ты получишь на свой баланс 10 монет.\n\n*Расценки в магазине*: \n   {available_Present[0]} \n   {available_Present[1]} \n   {available_Present[2]} \n   {available_Present[3]} \n   {available_Present[4]} ", parse_mode="Markdown")
-    #time.sleep(1)
+    time.sleep(1)
+    await message.answer(f"Если ты успела поесть максимум через {intervalEat} минут после сообщения, то ты получишь на свой баланс 10 монет.\n\n*Расценки в магазине*: \n   {available_Present[0]} \n   {available_Present[1]} \n   {available_Present[2]} \n   {available_Present[3]} \n   {available_Present[4]} ", parse_mode="Markdown")
+    time.sleep(1)
     
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     for hour in available_timeBreak:
@@ -275,7 +275,6 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     if(allowedEat[0] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
-                        balance=sql.fetchone()
                         momentbalance=balance[0]
                         momentbalance=momentbalance+10
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
@@ -294,7 +293,6 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                     if(allowedEat[0] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
-                        balance=sql.fetchone()
                         balance=sql.fetchone()
                         momentbalance=balance[0]
                         momentbalance=momentbalance+10
@@ -317,7 +315,6 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     if(allowedEat[1] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
-                        balance=sql.fetchone()
                         momentbalance=balance[0]
                         momentbalance=momentbalance+10
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
@@ -338,7 +335,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     if(allowedEat[1] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
-                        balance=sql.fetchone()
+                        
                         momentbalance=balance[0]
                         momentbalance=momentbalance+10
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
@@ -438,7 +435,6 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     if(allowedEat[1] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
-                        balance=sql.fetchone()
                         momentbalance=balance[0]
                         momentbalance=momentbalance+10
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
@@ -457,7 +453,6 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                 if(currentime.hour <= launchWeekingHour % 24 and currentime.minute <= (launchWeekingMinute+intervalEat) % 60):
                     if(allowedEat[1] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
-                        balance=sql.fetchone()
                         balance=sql.fetchone()
                         momentbalance=balance[0]
                         momentbalance=momentbalance+10
@@ -479,7 +474,6 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                     if(allowedEat[2] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
-                        balance=sql.fetchone()
                         momentbalance=balance[0]
                         momentbalance=momentbalance+10
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
@@ -496,7 +490,6 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                 if(currentime.hour <= eveningWeekingHour % 24 and currentime.minute <= (eveningWeekingMinute+intervalEat) % 60):
                     if(allowedEat[2] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
-                        balance=sql.fetchone()
                         balance=sql.fetchone()
                         momentbalance=balance[0]
                         momentbalance=momentbalance+10
