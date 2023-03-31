@@ -21,31 +21,54 @@ from datetime import date
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import pytz
 
-hour=17
-min=25
-hournow=18
-minnow=26
-interval=60
-if( (min+interval)%60 != min+interval):
-    if(hournow < (hour+1) % 24 or minnow <= (min+interval) % 60):
-        print("ok")
-    else:
-        print("no")
-if( (min+interval)%60 == min+interval):
-    print("yes")
-    if(hournow <= hour % 24 and minnow <= (min+interval) % 60):
-        print("ok")
-    else:
-        print("no")
+import sqlite3
+from collections import Counter
 
+db=sqlite3.connect('EatTest.db')
+sql=db.cursor()
 
+# hour=17
+# min=
+# hournow=18
+# minnow=26
+# interval=60
+# if( (min+interval)%60 != min+interval):
+#     if(hournow < (hour+1) % 24 or minnow <= (min+interval) % 60):
+#         print("ok")
+#     else:
+#         print("no")
+# if( (min+interval)%60 == min+interval):
+#     print("yes")
+#     if(hournow <= hour % 24 and minnow <= (min+interval) % 60):
+#         print("ok")
+#     else:
+#         print("no")
+eveningHour=19
+eveningMinute=50
+intervalEat=50
 tz_Vienna = pytz.timezone('Europe/Vienna')
 currentime=datetime.datetime.now(tz_Vienna)
-currentdate=date.today()
-print(f"{currentime.hour}:{currentime.minute}")
+print(eveningHour, ":", eveningMinute)
+print("Текущее: ",currentime.hour, ":", currentime.minute)
 
-if (currentdate.weekday()==0 or currentdate.weekday()== 1 or currentdate.weekday()== 2 or currentdate.weekday()==3 or currentdate.weekday()==4 ):
-    print(currentdate.weekday()) 
+if( (eveningMinute+intervalEat)%60 != eveningMinute+intervalEat):
+    if(currentime.hour+1 <=  ((eveningHour+1) % 24) or currentime.minute <= ((eveningMinute+intervalEat) % 60)):
 
+        print( "Умница, ты поела вовремя")
+        print("1")
+    else:
+        print( "К сожалению, ты поела не вовремя")
+        print("2")
+
+
+if( (eveningMinute+intervalEat)%60 == eveningMinute+intervalEat):
+    if(currentime.hour <= (eveningHour % 24) and currentime.minute <= ((eveningMinute+intervalEat) % 60)):
+        print( "Умница, ты поела вовремя")
+        print("3")            
+                       
+                        
+    else:
+        print( "К сожалению, ты поела не вовремя")
+        print("4")
     
 
