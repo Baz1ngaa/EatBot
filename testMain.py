@@ -1174,7 +1174,7 @@ async def timeMessagePill(dp: Dispatcher):
     allLogins = sql.fetchall()  
     e=0
     for e in allLogins:
-         await dp.bot.send_message(e, f"Не забудь принять медикаменты, {nettName[Zahle]}!")
+         await dp.bot.send_message(e[0], f"Не забудь принять медикаменты, {nettName[Zahle]}!")
          print("PillSended")
 
 
@@ -1193,7 +1193,7 @@ def schedule_jobs():
     scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
-    scheduler.add_job(timeMessagePill, 'cron', hour= 19, minute= int(wdw), second= 20, args=(dp,))
+    scheduler.add_job(timeMessagePill, 'cron', hour= 19, minute= int(wdw), second= 25, args=(dp,))
     scheduler.add_job(AllowNull, 'cron',hour=2,minute= 59, second= 30, args=(dp,))
     
 
