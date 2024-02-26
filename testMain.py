@@ -59,7 +59,7 @@ class student(StatesGroup):
     #waiting_for_gettable=State()
 
 
-db=sqlite3.connect('EatTest.db')
+db=sqlite3.connect('EatYuliia.db')
 sql=db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS profileTel (
     login TEXT,
@@ -1152,7 +1152,7 @@ async def timeMessageEvening(dp: Dispatcher):
     
     
 def AllowNull(dp: Dispatcher):
-    db=sqlite3.connect('EatTest.db')
+    db=sqlite3.connect('EatYuliia.db')
     sql=db.cursor()
     sql.execute("SELECT login FROM profileTel")
     allLogins = sql.fetchall()  
@@ -1166,6 +1166,18 @@ def AllowNull(dp: Dispatcher):
         db.commit()
         sql.execute("SELECT Name FROM Allowed")
     print("One gived")
+
+async def timeMessagePill(dp: Dispatcher):
+    Zahle=random.randint(0, 19)
+    sql=db.cursor()
+    sql.execute("SELECT login FROM profileTel")
+    allLogins = sql.fetchall()  
+    e=0
+    for e in range(len(allLogins)):
+         await dp.bot.send_message(e, f"Не забудь принять медикаменты, {nettName[Zahle]}!")
+         print("PillSended")
+
+
     
          
 
@@ -1181,6 +1193,7 @@ def schedule_jobs():
     scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
+    scheduler.add_job(timeMessagePill 'cron', hour=20, minute= wdw, second= 20, args=(dp,))
     scheduler.add_job(AllowNull, 'cron',hour=2,minute= 59, second= 30, args=(dp,))
     
 
@@ -1205,6 +1218,7 @@ def register_handlers_student(dp: Dispatcher):
     dp.register_message_handler(readyPeople, state=student.waiting_for_ready)
     dp.register_message_handler(buy, state=student.waiting_for_buy)
     dp.register_message_handler(timeMessageEvening, state="*")
+    dp.register_message_handler(timeMessagePill, state="*")
 
 
 
