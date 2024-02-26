@@ -28,11 +28,11 @@ API_TOKEN = '6129552928:AAEjUQt8iLEYAk2mCAApSZKDkxe14B8U5N8'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 global wdw, wdw2
-wdw=2
+wdw=1
 wdw2=22
 available_timeBreak = ["6:30","7:00", "7:30"]
 available_timeBreakWeeking = ["9:30","10:00", "10:30", "11:00","11:30", "12:00", "13:00", "13:30", "14:00", "14:30"]
-available_timeLaunch = ["12:30" , "13:00","13:30",  "14:00", "14:30", "15:00", "15:30", "16:00"]
+available_timeLaunch = [f"14:{wdw}","12:30" , "13:00","13:30",  "14:00", "14:30", "15:00", "15:30", "16:00"]
 available_timeEvening = ["18:00", "18:30","19:00", "19:30", "20:00"]
 available_YesOrNot = ["Да","Нет"]
 available_Ready = ["Готово"]
@@ -40,7 +40,7 @@ prise=[90,140,300,420,800]
 available_Present = [f"Шоколадка: {prise[0]}",f"Большая шоколадка: {prise[1]}",f"Ужин: {prise[2]}", f"Секретный подарок: {prise[3]}", f"День послушности: {prise[4]}" ]
 
 available_Eat=["Я позавтракала", " Я пообедала", "Я поужинала"]
-nettName=["Цветочек","Розочка", "Котёнок", "Солнышко", "Звездочка", "Пупсик", "Счастье мое", "Зайка", "Зая", "Мышонок", "Выдренок", "Юлечка", "Юленька", "Принцесса", "Сокровище", "Вреднюлька", "Зайкин", "Пупсик", "Королева", "Милая", "Таракашкин", "Еееева", "Крысёнок", "Магнат", "Моя самая послушная девушка на планете Земля", "Золотце", "Юлия Александровна", "Моя уверенность в будущем", "Банджерик", "Кракен"]
+nettName=["Цветочек","Розочка", "Котёнок", "Солнышко", "Звездочка", "Пупсик", "Счастье мое", "Зайка", "Зая", "Мышонок", "Выдренок", "Юлечка", "Юленька", "Принцесса", "Сокровище", "Вреднюлька", "Зайкин", "Пупсик", "Королева", "Милая"]
 global intervalEat
 intervalEat=50
 class student(StatesGroup):
@@ -591,7 +591,7 @@ async def buy(message: types.Message, state: FSMContext):
 
 
 async def timeMessageEvening(dp: Dispatcher):
-    Zahle=random.randint(0, (len(nettName)-1))
+    Zahle=random.randint(0, 19)
     tz_Vienna = pytz.timezone('Europe/Vienna')
     currentime=datetime.datetime.now(tz_Vienna)
     currentdate=date.today()
@@ -894,6 +894,20 @@ async def timeMessageEvening(dp: Dispatcher):
                             await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
             #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break13"')
             db.commit()
+        if(currentime.hour==14 and currentime.minute== int(wdw)):
+            
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timelaunchHour= 14 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchMinute= {wdw} ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Настало время обедать(тест), {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break24"')
+            db.commit()
 
 
 
@@ -1152,6 +1166,19 @@ def AllowNull(dp: Dispatcher):
         db.commit()
         sql.execute("SELECT Name FROM Allowed")
     print("One gived")
+
+async def timeMessagePill(dp: Dispatcher):
+    Zahle=random.randint(0, 19)
+    sql=db.cursor()
+    sql.execute("SELECT login FROM profileTel")
+    allLogins = sql.fetchall()  
+    e=0
+    for e in allLogins:
+         await dp.bot.send_message(e[0], f"Не забудь принять медикаменты, {nettName[Zahle]}!")
+         
+    
+
+
     
          
 
@@ -1166,7 +1193,8 @@ def schedule_jobs():
     #breakfastHour, breakfastMinute,launchHour,launchMinute,eveningHour, eveningMinute,breakfastWeekingHour, breakfastWeekingMinute,launchWeekingHour,launchWeekingMinute,eveningWeekingHour, eveningWeekingMinute=sql.fetchone()
     scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
-    #scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
+    scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
+    scheduler.add_job(timeMessagePill, 'cron', hour= 20, minute= 10, second= 25, args=(dp,))
     scheduler.add_job(AllowNull, 'cron',hour=2,minute= 59, second= 30, args=(dp,))
     
 
@@ -1191,6 +1219,7 @@ def register_handlers_student(dp: Dispatcher):
     dp.register_message_handler(readyPeople, state=student.waiting_for_ready)
     dp.register_message_handler(buy, state=student.waiting_for_buy)
     dp.register_message_handler(timeMessageEvening, state="*")
+    dp.register_message_handler(timeMessagePill, state="*")
 
 
 
