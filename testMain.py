@@ -28,11 +28,11 @@ API_TOKEN = '5977194701:AAGJusSEqCD6ug2iOijr3IlTvGJRfR4r6ag'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 global wdw, wdw2
-wdw=input()
+wdw=2
 wdw2=22
-available_timeBreak = ["6:30","7:00", "7:30", f"9:{wdw}"]
-available_timeBreakWeeking = ["9:30","10:00", "10:30", "11:00","11:30"]
-available_timeLaunch = ["12:30" , "13:00","13:30",  "14:00", "14:30", "15:00"]
+available_timeBreak = ["6:30","7:00", "7:30"]
+available_timeBreakWeeking = ["9:30","10:00", "10:30", "11:00","11:30", "12:00", "13:00", "13:30", "14:00", "14:30"]
+available_timeLaunch = ["12:30" , "13:00","13:30",  "14:00", "14:30", "15:00", "15:30", "16:00"]
 available_timeEvening = ["18:00", "18:30","19:00", "19:30", "20:00"]
 available_YesOrNot = ["Да","Нет"]
 available_Ready = ["Готово"]
@@ -572,14 +572,14 @@ async def buy(message: types.Message, state: FSMContext):
 #     usersLogin=sql.fetchone()
 #     if(usersLogin != None):
 #         for person in usersLogin:
-#                 await dp.bot.send_message(person, f"Время завтракать, {nettName[Zahle]}! Приятного аппетита! 💞✨ \nНажми /ready , когда покушаешь")
+#                 await dp.bot.send_message(person, f"Пора завтракать, {nettName[Zahle]}! Приятного аппетита! 💞✨ \nНажми /ready , когда покушаешь")
 #     global allowedBalance
 #     allowedBalance=1
 
 
 # async def timeMessageLaunch(dp: Dispatcher):
 #     Zahle=random.randint(0, 19)
-#     await dp.bot.send_message(login_id, f"Время обедать, {nettName[Zahle]}! Приятного аппетита!💖✨ \nНажми /ready , когда покушаешь")
+#     await dp.bot.send_message(login_id, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!💖✨ \nНажми /ready , когда покушаешь")
     
 #     global allowedBalance
 #     allowedBalance=1
@@ -612,8 +612,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break0"')
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break0"')
             db.commit()
         if(currentime.hour==7 and currentime.minute==0   ):
             
@@ -625,8 +625,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break1"')
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break1"')
             db.commit()
         if(currentime.hour==7 and currentime.minute==30 ):
             
@@ -638,23 +638,10 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break2"')
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break2"')
             db.commit()
-        if(currentime.hour==9 and currentime.minute== int(wdw) ):
-            
-            print("Ready24")
-            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastHour= 9 ")
-            usersLoginHour=sql.fetchall()
-            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastMinute= {int(wdw)} ")
-            usersLogin=sql.fetchall()
-            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
-            if(usersLogin != None):
-                for person in usersLogin:
-                        for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break24"')
-            db.commit()
+        
     
     
     if(currentdate.weekday()==5 or currentdate.weekday()== 6 ):
@@ -669,8 +656,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break3"')
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break3"')
             db.commit()
         if(currentime.hour==10 and currentime.minute==0 ) :
             
@@ -683,8 +670,8 @@ async def timeMessageEvening(dp: Dispatcher):
                 for person in usersLogin:
                         for oneMan in person:
         
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break4"')
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break4"')
             db.commit()
         if(currentime.hour==10 and currentime.minute==30  ):
             
@@ -696,8 +683,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break5"')
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break5"')
             db.commit()
         if(currentime.hour==11 and currentime.minute==0   ):
             
@@ -709,8 +696,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break6"')
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break6"')
             db.commit()
         if(currentime.hour==11 and currentime.minute==30 ) :
             
@@ -722,8 +709,73 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break7"')
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break7"')
+            db.commit()
+        if(currentime.hour==12 and currentime.minute==00 ) :
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingHour= 12 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingMinute= 0 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break7"')
+            db.commit()
+        if(currentime.hour==13 and currentime.minute==0 ) :
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingHour= 13 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingMinute= 0 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break7"')
+            db.commit()
+        if(currentime.hour==13 and currentime.minute==30 ) :
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingHour= 13 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingMinute= 30 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break7"')
+            db.commit()
+        if(currentime.hour==14 and currentime.minute==0 ) :
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingHour= 14 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingMinute= 0 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break7"')
+            db.commit()
+        if(currentime.hour==14 and currentime.minute==30 ) :
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingHour= 14 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastWeekingMinute= 30 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Пора завтракать, {nettName[Zahle]}! Смачного!☀️ \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break7"')
             db.commit()
     
     
@@ -743,8 +795,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break8"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break8"')
             db.commit()
         if(currentime.hour==13 and currentime.minute==0  ):
             
@@ -756,8 +808,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break9"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break9"')
             db.commit()
         if(currentime.hour==13 and currentime.minute==30 ):
             
@@ -769,8 +821,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break10"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break10"')
             db.commit()
         if(currentime.hour==14 and currentime.minute==00  ):
             
@@ -782,8 +834,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break11"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break11"')
             db.commit()
         if(currentime.hour==14 and currentime.minute==30 ):
             
@@ -795,8 +847,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break12"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break12"')
             db.commit()
         
         if(currentime.hour==15 and currentime.minute==0 ):
@@ -809,9 +861,37 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break13"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break13"')
             db.commit()
+        if(currentime.hour==15 and currentime.minute==30 ):
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchHour= 15 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchMinute= 30 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break13"')
+            db.commit()
+        if(currentime.hour==16 and currentime.minute==0 ):
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchHour= 16 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchMinute= 0 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break13"')
+            db.commit()
+
+
 
 
     if(currentdate.weekday()==5 or currentdate.weekday()== 6 ):
@@ -825,8 +905,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break14"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break14"')
             db.commit()
         if(currentime.hour==13 and currentime.minute==0  ):
             
@@ -838,8 +918,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break15"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break15"')
             db.commit()
         if(currentime.hour==13 and currentime.minute==30  ):
             
@@ -851,8 +931,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break16"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break16"')
             db.commit()
         if(currentime.hour==14 and currentime.minute==00  ):
             
@@ -864,8 +944,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break17"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break17"')
             db.commit()
         if(currentime.hour==14 and currentime.minute==30 ):
             
@@ -877,8 +957,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break18"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break18"')
             db.commit()
         
         if(currentime.hour==15 and currentime.minute==0  ):
@@ -891,9 +971,36 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время обедать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break19"')
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break19"')
             db.commit()
+        if(currentime.hour==15 and currentime.minute==30 ):
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchHour= 15 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchMinute= 30 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break13"')
+            db.commit()
+        if(currentime.hour==16 and currentime.minute==0 ):
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchHour= 16 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchMinute= 0 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Вот и обедать нужно, {nettName[Zahle]}! Приятного аппетита!🍓 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break13"')
+            db.commit()
+
     
 
 
@@ -911,8 +1018,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break20"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break20"')
             db.commit()
         if(currentime.hour==18 and currentime.minute==30 ):
             
@@ -924,8 +1031,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break21"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break21"')
             db.commit()
         if(currentime.hour==19 and currentime.minute==0  ):
             
@@ -937,8 +1044,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break22"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break22"')
             db.commit()
         if(currentime.hour==19 and currentime.minute==30 ):
             
@@ -950,8 +1057,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break23"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break23"')
             db.commit()
         
         
@@ -966,8 +1073,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break24"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break24"')
             db.commit()
         
     if(currentdate.weekday()==5 or currentdate.weekday()== 6 ):
@@ -981,8 +1088,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break26"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break26"')
             db.commit()
         if(currentime.hour==18 and currentime.minute==30  ):
             
@@ -994,8 +1101,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break27"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break27"')
             db.commit()
         if(currentime.hour==19 and currentime.minute==0  ):
             
@@ -1007,8 +1114,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break28"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break28"')
             db.commit()
         if(currentime.hour==19 and currentime.minute==30  ):
             
@@ -1020,8 +1127,8 @@ async def timeMessageEvening(dp: Dispatcher):
             if(usersLogin != None):
                 for person in usersLogin:
                         for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break29"')
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break29"')
             db.commit()
         
     
@@ -1055,8 +1162,8 @@ def schedule_jobs():
     #breakfastHour, breakfastMinute,launchHour,launchMinute,eveningHour, eveningMinute,breakfastWeekingHour, breakfastWeekingMinute,launchWeekingHour,launchWeekingMinute,eveningWeekingHour, eveningWeekingMinute=sql.fetchone()
     scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
-    scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
-    scheduler.add_job(AllowNull, 'cron',hour=8,minute= 59, second= 30, args=(dp,))
+    #scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
+    scheduler.add_job(AllowNull, 'cron',hour=2,minute= 59, second= 30, args=(dp,))
     
 
     
