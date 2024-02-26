@@ -12,6 +12,7 @@ db.commit()
  #   sql.execute(f"INSERT INTO profileTel VALUES (?,?,?)", (user_id, user_region, user_klass))
   #  db.commit()
 nuwmerUsers=0
+
 for value in sql.execute("SELECT * FROM profileTel"):
     nuwmerUsers=nuwmerUsers+1
     print(value)
