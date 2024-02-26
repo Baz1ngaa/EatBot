@@ -18,7 +18,8 @@ import pytz
 db=sqlite3.connect('EatTest.db')
 sql=db.cursor()
 sql.execute("SELECT login FROM profileTel")
-allLogins = sql.fetchone()  
+allLogins = sql.fetchall()  
+print(allLogins)
 for peopleMan in allLogins:
     sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{peopleMan}"')
     db.commit()
