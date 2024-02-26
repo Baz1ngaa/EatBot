@@ -19,7 +19,7 @@ db=sqlite3.connect('EatTest.db')
 sql=db.cursor()
 sql.execute("SELECT login FROM profileTel")
 allLogins = sql.fetchall()  
-print(allLogins)
+print(len(allLogins))
 for i in len(allLogins):
     print(allLogins[i])
     sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{allLogins[i]}"')
