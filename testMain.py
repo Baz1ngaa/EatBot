@@ -1173,7 +1173,7 @@ async def timeMessagePill(dp: Dispatcher):
     sql.execute("SELECT login FROM profileTel")
     allLogins = sql.fetchall()  
     e=0
-    for e in range(len(allLogins)):
+    for e in allLogins:
          await dp.bot.send_message(e, f"Не забудь принять медикаменты, {nettName[Zahle]}!")
          print("PillSended")
 
