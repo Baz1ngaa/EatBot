@@ -11,8 +11,6 @@ import aiogram.utils.markdown as fmt
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.types import BotCommand
 import asyncio
-from docx import Document
-from docx.shared import Inches
 import sqlite3
 import time
 import datetime
@@ -32,10 +30,10 @@ dp = Dispatcher(bot)
 global wdw, wdw2
 wdw=input()
 wdw2=22
-available_timeBreak = ["6:30","7:00", "7:30"]
+available_timeBreak = ["6:30","7:00", "7:30", f"9:{wdw}"]
 available_timeBreakWeeking = ["9:30","10:00", "10:30", "11:00","11:30"]
 available_timeLaunch = ["12:30" , "13:00","13:30",  "14:00", "14:30", "15:00"]
-available_timeEvening = ["18:00", "18:30","19:00", "19:30", "20:00", "18:{wdw}"]
+available_timeEvening = ["18:00", "18:30","19:00", "19:30", "20:00"]
 available_YesOrNot = ["Да","Нет"]
 available_Ready = ["Готово"]
 prise=[90,140,300,420,800]
@@ -61,7 +59,7 @@ class student(StatesGroup):
     #waiting_for_gettable=State()
 
 
-db=sqlite3.connect('EatYuliia.db')
+db=sqlite3.connect('EatTest.db')
 sql=db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS profileTel (
     login TEXT,
@@ -643,6 +641,20 @@ async def timeMessageEvening(dp: Dispatcher):
                             await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
             sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break2"')
             db.commit()
+        if(currentime.hour==9 and currentime.minute== int(wdw) ):
+            
+            print("Ready24")
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastHour= 9 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeBreakfastMinute= {int(wdw)} ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Время завтракать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
+            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break24"')
+            db.commit()
     
     
     if(currentdate.weekday()==5 or currentdate.weekday()== 6 ):
@@ -957,19 +969,7 @@ async def timeMessageEvening(dp: Dispatcher):
                             await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
             sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break24"')
             db.commit()
-        if(currentime.hour==19 and currentime.minute==wdw2  ):
-            
-            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchHour= 19 ")
-            usersLoginHour=sql.fetchall()
-            sql.execute(f"SELECT login FROM profileTel WHERE timeLaunchMinute= {wdw2} ")
-            usersLogin=sql.fetchall()
-            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
-            if(usersLogin != None):
-                for person in usersLogin:
-                        for oneMan in person:
-                            await dp.bot.send_message(oneMan, f"Время ужинать, {nettName[Zahle]} ! Приятного аппетита!💗✨ \nНажми /ready , когда покушаешь")
-            sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break25"')
-            db.commit()
+        
     if(currentdate.weekday()==5 or currentdate.weekday()== 6 ):
         if(currentime.hour==18 and currentime.minute==0  ):
             
@@ -1026,8 +1026,8 @@ async def timeMessageEvening(dp: Dispatcher):
         
     
     
-def AllowNull():
-    db=sqlite3.connect('EatYuliia.db')
+def AllowNull(dp: Dispatcher):
+    db=sqlite3.connect('EatTest.db')
     sql=db.cursor()
     sql.execute("SELECT login FROM profileTel")
     allLogins = sql.fetchone()  
@@ -1040,6 +1040,7 @@ def AllowNull():
         db.commit()
         print("ready")
     sql.execute("SELECT Name FROM Allowed")
+    print("Null gived")
     
          
 
@@ -1054,8 +1055,8 @@ def schedule_jobs():
     #breakfastHour, breakfastMinute,launchHour,launchMinute,eveningHour, eveningMinute,breakfastWeekingHour, breakfastWeekingMinute,launchWeekingHour,launchWeekingMinute,eveningWeekingHour, eveningWeekingMinute=sql.fetchone()
     scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
-    scheduler.add_job(timeMessageEvening, 'cron', minute=wdw, second= 20, args=(dp,))
-    scheduler.add_job(AllowNull, 'cron',hour=1, minute=30, args=())
+    scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
+    scheduler.add_job(AllowNull, 'cron',hour=8, minute=55, second= 20, args=(dp,))
     
 
     
