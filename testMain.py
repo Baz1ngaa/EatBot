@@ -267,9 +267,8 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
     if(currentdate.weekday() == 0 or currentdate.weekday() == 1 or currentdate.weekday() == 2 or currentdate.weekday() == 3 or currentdate.weekday() == 4 ):    
         if(message.text.lower()== "я позавтракала"):
             
-            if( (breakfastMinute+intervalEat)%60 != breakfastMinute+intervalEat):
-                if(currentime.hour +1<= (breakfastHour+1) % 24 or currentime.minute <= (breakfastMinute+intervalEat) % 60):
-                
+            if(((breakfastMinute+intervalEat)//60)==0):
+                if(currentime.hour==breakfastHour and currentime.minute<=(breakfastMinute+intervalEat)):
                     if(allowedEat[0] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
@@ -278,7 +277,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -286,9 +285,11 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
-            if( (breakfastMinute+intervalEat)%60 == breakfastMinute+intervalEat):
-                if(currentime.hour <= breakfastHour % 24 and currentime.minute <= (breakfastMinute+intervalEat) % 60):
-                    await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
+        
+            
+            if(((breakfastMinute+intervalEat)//60)!=0):
+                if((currentime.hour==breakfastHour and currentime.minute<=60 and currentime.minute>= breakfastMinute) or (currentime.hour==(breakfastHour+1) and currentime.minute<=((breakfastMinute+intervalEat)%60) and currentime.minute>=0)):
+                    
                     if(allowedEat[0] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
@@ -297,7 +298,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -305,11 +306,13 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
+        
+        
         if(message.text.lower()== "я пообедала"):
             
-            if( (launchMinute+intervalEat)%60 != launchMinute+intervalEat):
-                if(currentime.hour+1 <= (launchHour+1) % 24 or currentime.minute <= (launchMinute+intervalEat) % 60):
-                    #await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
+            if(((launchMinute+intervalEat)//60)==0):
+                if(currentime.hour==launchHour and currentime.minute<=(launchMinute+intervalEat)):
+                    
                     if(allowedEat[1] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
@@ -318,7 +321,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET LNallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -327,9 +330,9 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
                     
-            if( (launchMinute+intervalEat)%60 == launchMinute+intervalEat):
-                if(currentime.hour <= launchHour % 24 and currentime.minute <= (launchMinute+intervalEat) % 60):
-                    #await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
+            if(((launchMinute+intervalEat)//60)!=0):
+                if((currentime.hour==launchHour and currentime.minute<=60 and currentime.minute>= launchMinute) or (currentime.hour==(launchHour+1) and currentime.minute<=((launchMinute+intervalEat)%60) and currentime.minute>=0)):
+                    
                     if(allowedEat[1] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
@@ -339,7 +342,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET LNallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -348,10 +351,10 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
                     
+       
         if(message.text.lower()== "я поужинала"):
-           
-            if( (eveningMinute+intervalEat)%60 != eveningMinute+intervalEat):
-                if(currentime.hour+1 <= (eveningHour+1) % 24 or currentime.minute <= (eveningMinute+intervalEat) % 60):
+            if(((eveningMinute+intervalEat)//60)==0):
+                if(currentime.hour==eveningHour and currentime.minute<=(eveningMinute+intervalEat)):
                     if(allowedEat[2] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
@@ -359,15 +362,16 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         momentbalance=momentbalance+10
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET EVallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
                          await dp.bot.send_message(user_id, "Умница, ты поела вовремя")
                 else:
                     await dp.bot.send_message(user_id, "К сожалению, ты поела не вовремя")
-            if( (eveningMinute+intervalEat)%60 == eveningMinute+intervalEat):
-                if(currentime.hour <= eveningHour % 24 and currentime.minute <= (eveningMinute+intervalEat) % 60):
+            if(((eveningMinute+intervalEat)//60)!=0):
+    
+                if((currentime.hour==eveningHour and currentime.minute<=60 and currentime.minute>= eveningMinute) or (currentime.hour==(eveningHour+1) and currentime.minute<=((eveningMinute+intervalEat)%60) and currentime.minute>=0)):
                     if(allowedEat[2] == 1):
                         sql.execute(f"SELECT strike FROM profileTel WHERE login= '{login_id}' ")
                         balance=sql.fetchone()
@@ -376,7 +380,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET EVallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -401,7 +405,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET EVallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -419,7 +423,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -438,7 +442,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET LNallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -457,7 +461,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET LNallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -477,7 +481,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
@@ -494,7 +498,7 @@ async def EatReadyChoose(message: types.Message, state: FSMContext):
                         sql.execute(f'UPDATE profileTel SET strike = "{momentbalance}" WHERE login = "{login_id}"')
                         
                         db.commit()
-                        await dp.bot.send_message(user_id, "Умница, ты поела вовремя. Твой баланс пополнен")
+                        await dp.bot.send_message(user_id, "Молодец, ты поела вовремя. Твой баланс пополнен")
                         sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{login_id}"')
                         db.commit()
                     else:
