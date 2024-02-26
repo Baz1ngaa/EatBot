@@ -1193,7 +1193,7 @@ def schedule_jobs():
     scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
-    scheduler.add_job(timeMessagePill 'cron', hour=20, minute= wdw, second= 20, args=(dp,))
+    scheduler.add_job(timeMessagePill, 'cron', hour= 20, minute= int(wdw), second= 20, args=(dp,))
     scheduler.add_job(AllowNull, 'cron',hour=2,minute= 59, second= 30, args=(dp,))
     
 
