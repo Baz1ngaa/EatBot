@@ -1,5 +1,5 @@
 import sqlite3
-db=sqlite3.connect('EatTest.db')
+db=sqlite3.connect('EatYuliia.db')
 sql=db.cursor()
 
 db.commit()
@@ -15,5 +15,11 @@ nuwmerUsers=0
 
 for value in sql.execute("SELECT * FROM profileTel"):
     nuwmerUsers=nuwmerUsers+1
-    print(value)
-print("Всего пользователей:", nuwmerUsers)
+    #print(value)
+#print("Всего пользователей:", nuwmerUsers)
+sql=db.cursor()
+sql.execute("SELECT login FROM profileTel")
+allLogins = sql.fetchall()  
+e=0
+for e in allLogins:
+    print(e[0])
