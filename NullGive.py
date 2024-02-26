@@ -21,7 +21,7 @@ sql.execute("SELECT login FROM profileTel")
 allLogins = sql.fetchall()  
 print(len(allLogins))
 i=0
-for i in len(allLogins):
+for i in range(len(allLogins)):
     print(allLogins[i])
     sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{allLogins[i]}"')
     db.commit()
