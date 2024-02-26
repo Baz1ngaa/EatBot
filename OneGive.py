@@ -21,11 +21,11 @@ allLogins = sql.fetchall()
 i=0
 for i in range(len(allLogins)):
     
-    sql.execute(f'UPDATE profileTel SET BFallowed = 0 WHERE login = "{allLogins[i][0]}"')
+    sql.execute(f'UPDATE profileTel SET BFallowed = 1 WHERE login = "{allLogins[i][0]}"')
     db.commit()
-    sql.execute(f'UPDATE profileTel SET LNallowed = 0 WHERE login = "{allLogins[i][0]}"')
+    sql.execute(f'UPDATE profileTel SET LNallowed = 1 WHERE login = "{allLogins[i][0]}"')
     db.commit()
-    sql.execute(f'UPDATE profileTel SET EVallowed = 0 WHERE login = "{allLogins[i][0]}"')
+    sql.execute(f'UPDATE profileTel SET EVallowed = 1 WHERE login = "{allLogins[i][0]}"')
     db.commit()
     print("ready")
 sql.execute("SELECT Name FROM Allowed") 
