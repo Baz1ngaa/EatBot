@@ -59,7 +59,7 @@ class student(StatesGroup):
     #waiting_for_gettable=State()
 
 
-db=sqlite3.connect('EatYuliia.db')
+db=sqlite3.connect('EatTest.db')
 sql=db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS profileTel (
     login TEXT,
@@ -1152,7 +1152,7 @@ async def timeMessageEvening(dp: Dispatcher):
     
     
 def AllowNull(dp: Dispatcher):
-    db=sqlite3.connect('EatYuliia.db')
+    db=sqlite3.connect('EatTest.db')
     sql=db.cursor()
     sql.execute("SELECT login FROM profileTel")
     allLogins = sql.fetchall()  
