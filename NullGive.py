@@ -28,7 +28,7 @@ allLogins = sql.fetchone()
 for peopleMan in allLogins:
     sql.execute(f'UPDATE profileTel SET BFallowed = 1 WHERE login = "{peopleMan}"')
     db.commit()
-    sql.execute(f'UPDATE profileTel SET LNallowed = 0 WHERE login = "{peopleMan}"')
+    sql.execute(f'UPDATE profileTel SET LNallowed = 1 WHERE login = "{peopleMan}"')
     db.commit()
     sql.execute(f'UPDATE profileTel SET EVallowed = 1 WHERE login = "{peopleMan}"')
     db.commit()
