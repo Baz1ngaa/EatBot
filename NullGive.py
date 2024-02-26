@@ -11,8 +11,6 @@ import aiogram.utils.markdown as fmt
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.types import BotCommand
 import asyncio
-from docx import Document
-from docx.shared import Inches
 import sqlite3
 import time
 import datetime
@@ -23,14 +21,14 @@ from collections import Counter
 import pytz
 
 
-db=sqlite3.connect('EatYuliia.db')
+db=sqlite3.connect('EatTest.db')
 sql=db.cursor()
 sql.execute("SELECT login FROM profileTel")
 allLogins = sql.fetchone()  
 for peopleMan in allLogins:
     sql.execute(f'UPDATE profileTel SET BFallowed = 1 WHERE login = "{peopleMan}"')
     db.commit()
-    sql.execute(f'UPDATE profileTel SET LNallowed = 1 WHERE login = "{peopleMan}"')
+    sql.execute(f'UPDATE profileTel SET LNallowed = 0 WHERE login = "{peopleMan}"')
     db.commit()
     sql.execute(f'UPDATE profileTel SET EVallowed = 1 WHERE login = "{peopleMan}"')
     db.commit()
