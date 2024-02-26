@@ -18,7 +18,7 @@ import pytz
 db=sqlite3.connect('EatTest.db')
 sql=db.cursor()
 sql.execute("SELECT login FROM profileTel")
-allLogins = sql.fetchall()  
+allLogins = sql.fetchone()  
 print(len(allLogins))
 i=0
 for i in range(len(allLogins)):
