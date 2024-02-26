@@ -18,6 +18,7 @@ db=sqlite3.connect('EatTest.db')
 sql=db.cursor()
 sql.execute("SELECT login FROM profileTel")
 allLogins = sql.fetchone()  
+print(allLogins)
 for peopleMan in allLogins:
     sql.execute(f'UPDATE profileTel SET BFallowed = 1 WHERE login = "{peopleMan}"')
     db.commit()
