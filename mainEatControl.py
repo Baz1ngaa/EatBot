@@ -1194,7 +1194,7 @@ def schedule_jobs():
     scheduler.add_job(timeMessageEvening, 'cron', minute=0,  second= 20, args=(dp,))
     scheduler.add_job(timeMessageEvening, 'cron', minute=30, second= 20, args=(dp,))
     #scheduler.add_job(timeMessageEvening, 'cron', second= 20, args=(dp,))
-    scheduler.add_job(timeMessagePill, 'cron', hour= 20, minute= 10, second= 25, args=(dp,))
+    scheduler.add_job(timeMessagePill, 'cron', hour= 20, minute= 15, second= 25, args=(dp,))
     scheduler.add_job(AllowNull, 'cron',hour=1,minute= 59, second= 30, args=(dp,))
     
 
