@@ -1148,6 +1148,19 @@ async def timeMessageEvening(dp: Dispatcher):
                             await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
             #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break29"')
             db.commit()
+        if(currentime.hour==20 and currentime.minute==0  ):
+            
+            sql.execute(f"SELECT login FROM profileTel WHERE timeEveningWeekingHour= 20 ")
+            usersLoginHour=sql.fetchall()
+            sql.execute(f"SELECT login FROM profileTel WHERE timeEveningWeekingMinute= 0 ")
+            usersLogin=sql.fetchall()
+            usersLogin=list((Counter(usersLoginHour) & Counter(usersLogin)).elements())
+            if(usersLogin != None):
+                for person in usersLogin:
+                        for oneMan in person:
+                            await dp.bot.send_message(oneMan, f"Настало время ужинать, {nettName[Zahle]}! Mahlzeit!🐿 \nНажми /ready , когда покушаешь")
+            #sql.execute(f'UPDATE Allowed SET Allowed = 0 WHERE Name = "Break29"')
+            db.commit()
         
     
     
